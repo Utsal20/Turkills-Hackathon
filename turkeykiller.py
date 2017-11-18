@@ -20,7 +20,7 @@ def get_image(path):
 
 #initialize screen
 pygame.init()
-screen = pygame.display.set_mode((1400, 800))
+screen = pygame.display.set_mode((800, 600))
 done = False
 
 #turkey image
