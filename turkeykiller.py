@@ -10,6 +10,10 @@ import os
 import random
 import time
 
+#initialize screen
+pygame.init()
+screen = pygame.display.set_mode((1000, 800))
+
 #image library function
 _image_library = {}
 def get_image(path):
@@ -21,9 +25,6 @@ def get_image(path):
                 _image_library[path] = image
         return image
     
-#initialize screen
-pygame.init()
-screen = pygame.display.set_mode((1000, 800))
 #background color
 screen.fill((175,238,238))
 bg = get_image('landscape.jpg')
@@ -101,4 +102,5 @@ while not done:
 def save_score(score):
         with open('highscores.txt','a') as filehandler:
                 filehandler.writelines('name'+' - '+str(score)+'\n')
+        print('highscore saved')
 save_score(score)
