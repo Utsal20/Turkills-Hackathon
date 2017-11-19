@@ -71,32 +71,34 @@ time_level = 2
 
 timer = time.time()
 
-#gameloop
-done = False
-while not done:
-        for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                        done = True
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                        if event.button == 1:
-                                mouse_pos = pygame.mouse.get_pos()
-                                print(mouse_pos)
-                                turkey_killed_or_not(mouse_pos)
-                                
-        if time.time()-time1 > time_level:
-                turkey_list = new_turkey()
-                time1 = time.time()
-        
-        print("Time: ", 30-(time.time()-timer) )        
-        if time.time()-timer>30:
-                done = True
+def playgame():
+        global time1, turkey_list
+        #gameloop
+        done = False
+        while not done:
+                for event in pygame.event.get():
+                        if event.type == pygame.QUIT:
+                                done = True
+                        if event.type == pygame.MOUSEBUTTONDOWN:
+                                if event.button == 1:
+                                        mouse_pos = pygame.mouse.get_pos()
+                                        print(mouse_pos)
+                                        turkey_killed_or_not(mouse_pos)
                                         
-        screen.blit(bg, (0,0))
-        update_score(0)
-        show_turkeys()
-        
-        pygame.display.flip()
-        #os.clock.tick(60)
+                if time.time()-time1 > time_level:
+                        turkey_list = new_turkey()
+                        time1 = time.time()
+                
+                print("Time: ", 30-(time.time()-timer) )        
+                if time.time()-timer>30:
+                        done = True
+                                                
+                screen.blit(bg, (0,0))
+                update_score(0)
+                show_turkeys()
+                
+                pygame.display.flip()
+                #os.clock.tick(60)
         
 #save score to file
 def save_score(score):
@@ -104,3 +106,8 @@ def save_score(score):
                 filehandler.writelines('name'+' - '+str(score)+'\n')
         print('highscore saved')
 save_score(score)
+
+
+if __name__=='__main__':
+        playgame()
+
