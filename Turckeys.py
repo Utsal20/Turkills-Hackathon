@@ -15,6 +15,7 @@ def get_image(path):
         image = pygame.image.load(canonicalized_path)
         _image_library[path] = image
     return image
+
 def text_objects(text, font):
     textSurface = font.render(text, True, black)
     return textSurface, textSurface.get_rect()
@@ -28,11 +29,21 @@ def button(msg,x,y,w,h,color,hc):
             print("Clicked")
     else:
         pygame.draw.rect(screen, color, (x, y, w, h))
-
     smallText = pygame.font.Font("freesansbold.ttf", 50)
     textSurf, textRect = text_objects(msg, smallText)
     textRect.center = ((x + (w/ 2)), (y + (h / 2)))
     screen.blit(textSurf, textRect)
+
+def fb(x,y,w,h):
+    mouse = pygame.mouse.get_pos()
+    cfb = pygame.mouse.get_pressed()
+    if x + w > mouse[0] > x and y + h > mouse[1] > y:
+        if cfb[0] == 1:
+            print("directing to  fb")
+    fb = pygame.transform.scale(get_image('fb.png'), (220, 90))
+    screen.blit(fb, (400, 460))
+
+
 
 
 # initialize screen
@@ -55,7 +66,10 @@ while not done:
         screen.blit(turkey, (600, 600))
         screen.blit(turkey, (740, 20))
 
-        #button
+        #buttons
         button("Play", 410,350,205,100,white,gold)
+        pygame.draw.rect(screen,black,(410,350,205,100), 1)
+        fb(400,460,220,90)
+
     pygame.display.flip()
     # os.clock.tick(60)
