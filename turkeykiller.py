@@ -53,6 +53,7 @@ def show_turkeys():
 def new_turkey():
         return int(random.randint(0,1000)/100)*100,int(random.randint(0,800)/100)*100
 
+#check if turkey was brutally murdered and do something if it was...
 def turkey_killed_or_not(mouse_pos):
         global turkey_list
         global time1
