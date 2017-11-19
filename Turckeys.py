@@ -1,6 +1,7 @@
 import pygame
 import pygame_textinput
 import os
+import time
 
 _image_library = {}
 
@@ -67,25 +68,25 @@ while not done:
     for event in events:
         if event.type == pygame.QUIT:
             done = True
+        name = textinput.get_text()
 
-        screen.fill((173, 216, 230))
-        #turkeys
-        turkey = pygame.transform.scale(get_image('turkey.png'), (240, 200))
-        screen.blit(turkey, (20, 20))
-        screen.blit(turkey, (180, 600))
-        screen.blit(turkey, (600, 600))
-        screen.blit(turkey, (740, 20))
+    screen.fill((173, 216, 230))
+    #turkeys
+    turkey = pygame.transform.scale(get_image('turkey.png'), (240, 200))
+    screen.blit(turkey, (20, 20))
+    screen.blit(turkey, (180, 600))
+    screen.blit(turkey, (600, 600))
+    screen.blit(turkey, (740, 20))
 
-        #buttons
-        button("Play", 410,450,205,100,white,gold,50)
-        fb(400,360,220,90)
+    #buttons
+    button("Play", 410,450,205,100,white,gold,50)
+    fb(400,360,220,90)
 
-        # name
-        text("Enter your name: ", 400, 250, 240, 50, 15)
-        text("or", 490, 330, 50, 50, 15)
-        textinput.update(events)
-        screen.blit(textinput.get_surface(), (450, 300))
-        if textinput.update(events):
-            name = textinput.get_text()
+    # name
+    text("Enter your name: ", 400, 250, 240, 50, 15)
+    text("or", 490, 330, 50, 50, 15)
+    textinput.update(events)
+    screen.blit(textinput.get_surface(), (450, 300))
+    
     pygame.display.flip()
-    clock.tick(60)
+    #clock.tick(60)
