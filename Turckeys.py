@@ -1,4 +1,5 @@
 import pygame
+import pygame_textinput
 import os
 
 _image_library = {}
@@ -20,7 +21,7 @@ def text_objects(text, font):
     textSurface = font.render(text, True, black)
     return textSurface, textSurface.get_rect()
 
-def button(msg,x,y,w,h,color,hc):
+def button(msg,x,y,w,h,color,hc,size):
     mouse = pygame.mouse.get_pos()
     click = pygame.mouse.get_pressed()
     if x + w > mouse[0] > x and y + h > mouse[1] > y:
@@ -29,10 +30,12 @@ def button(msg,x,y,w,h,color,hc):
             print("Clicked")
     else:
         pygame.draw.rect(screen, color, (x, y, w, h))
-    smallText = pygame.font.Font("freesansbold.ttf", 50)
+    smallText = pygame.font.Font("freesansbold.ttf", size)
     textSurf, textRect = text_objects(msg, smallText)
     textRect.center = ((x + (w/ 2)), (y + (h / 2)))
     screen.blit(textSurf, textRect)
+    pygame.draw.rect(screen, black, (x, y, w, h), 1)
+
 
 def fb(x,y,w,h):
     mouse = pygame.mouse.get_pos()
@@ -41,24 +44,31 @@ def fb(x,y,w,h):
         if cfb[0] == 1:
             print("directing to  fb")
     fb = pygame.transform.scale(get_image('fb.png'), (220, 90))
-    screen.blit(fb, (400, 460))
+    screen.blit(fb, (x, y))
 
+def  text(msg,x,y,w,h,size):
+    smallText = pygame.font.Font("freesansbold.ttf", size)
+    textSurf, textRect = text_objects(msg, smallText)
+    textRect.center = ((x + (w / 2)), (y + (h / 2)))
+    screen.blit(textSurf, textRect)
 
-
+textinput = pygame_textinput.TextInput()
 
 # initialize screen
 pygame.init()
+clock = pygame.time.Clock()
 screen = pygame.display.set_mode((1000, 800))
 pygame.display.set_caption("Guru's Turkeys")
 done = False
 
 # gameloop
 while not done:
-    for event in pygame.event.get():
+    events = pygame.event.get()
+    for event in events:
         if event.type == pygame.QUIT:
             done = True
 
-        screen.fill((222, 184, 135))
+        screen.fill((173, 216, 230))
         #turkeys
         turkey = pygame.transform.scale(get_image('turkey.png'), (240, 200))
         screen.blit(turkey, (20, 20))
@@ -67,9 +77,15 @@ while not done:
         screen.blit(turkey, (740, 20))
 
         #buttons
-        button("Play", 410,350,205,100,white,gold)
-        pygame.draw.rect(screen,black,(410,350,205,100), 1)
-        fb(400,460,220,90)
+        button("Play", 410,450,205,100,white,gold,50)
+        fb(400,360,220,90)
 
+        # name
+        text("Enter your name: ", 400, 250, 240, 50, 15)
+        text("or", 490, 330, 50, 50, 15)
+        textinput.update(events)
+        screen.blit(textinput.get_surface(), (450, 300))
+        if textinput.update(events):
+            name = textinput.get_text()
     pygame.display.flip()
-    # os.clock.tick(60)
+    clock.tick(60)
