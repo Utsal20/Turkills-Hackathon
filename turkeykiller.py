@@ -9,6 +9,7 @@ import pygame
 import os
 import random
 import time
+from pygame import mixer
 
 #initialize screen
 pygame.init()
@@ -49,6 +50,10 @@ def show_turkeys():
         screen.blit(turkey,turkey_list)
         #for i in turkey_list:
                 #screen.blit(turkey, i)
+                
+#turkey sounds
+mixer.init()
+mixer.music.load('turkeysound2.wav')
 
 def new_turkey():
         return int(random.randint(0,1000)/100)*100,int(random.randint(0,800)/100)*100
@@ -57,18 +62,32 @@ def new_turkey():
 def turkey_killed_or_not(mouse_pos):
         global turkey_list
         global time1
+        global time_level
         pos=(0,0)
         pos = int((mouse_pos[0])/100)*100,int((mouse_pos[1])/100)*100
         print('pos: ',pos)
         if pos == turkey_list:
                 update_score(200)
+                if mixer.music.get_busy():
+                        mixer.music.stop()
+                        print('sound stoppped')
+                mixer.music.play()
+                time_level = time_level * 0.9;
+                print('timelevel: ',time_level)
+                print('turkey killed')
+                print('sound played')
                 turkey_list = new_turkey()
                 time1 = time.time()
             
+#save score to file
+def save_score(score):
+        with open('highscores.txt','a') as filehandler:
+                filehandler.writelines('name '+str(score)+'\n')
+        print('highscore saved: ','name ',score)
         
 mouse_pos = (0,0)
 time1 = time.time()
-time_level = 2
+time_level = 2.0
 
 timer = time.time()
 
@@ -93,21 +112,17 @@ def playgame():
                 print("Time: ", 30-(time.time()-timer) )        
                 if time.time()-timer>30:
                         done = True
-                                                
+                
+                                
                 screen.blit(bg, (0,0))
                 update_score(0)
                 show_turkeys()
                 
                 pygame.display.flip()
                 #os.clock.tick(60)
+                
+        save_score(score)
         
-#save score to file
-def save_score(score):
-        with open('highscores.txt','a') as filehandler:
-                filehandler.writelines('name'+' - '+str(score)+'\n')
-        print('highscore saved')
-save_score(score)
-
 
 if __name__=='__main__':
         playgame()
