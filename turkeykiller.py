@@ -101,8 +101,6 @@ while not done:
 #save score to file
 def save_score(score):
         with open('highscores.txt','a') as filehandler:
-                filehandler.writelines(str(score)+'\n')
+                filehandler.writelines('name'+' - '+str(score)+'\n')
         print('highscore saved')
 save_score(score)
-
-#show highscores
