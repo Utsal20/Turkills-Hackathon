@@ -104,3 +104,5 @@ def save_score(score):
                 filehandler.writelines(str(score)+'\n')
         print('highscore saved')
 save_score(score)
+
+#show highscores
