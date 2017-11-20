@@ -86,15 +86,16 @@ def save_score(score):
         print('highscore saved: ','name ',score)
         
 mouse_pos = (0,0)
-time1 = time.time()
-time_level = 2.0
 
-timer = time.time()
+time_level = 2.0
 
 def playgame():
         global time1, turkey_list
         #gameloop
         done = False
+        time1 = time.time()
+        timer = time.time()
+
         while not done:
                 for event in pygame.event.get():
                         if event.type == pygame.QUIT:
