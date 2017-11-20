@@ -72,6 +72,13 @@ def startscreen():
             if event.type == pygame.QUIT:
                 done = True
             name = textinput.get_text()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    mouse_pos = pygame.mouse.get_pos()
+                    print(mouse_pos)
+                    if 410<mouse_pos[0]<615 and 450<mouse_pos[1]<550:
+                        print('play button clicked')
+                        done = True
     
         screen.fill((173, 216, 230))
         #turkeys

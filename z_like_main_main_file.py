@@ -1,7 +1,7 @@
 from Turckeys import startscreen
 from turkeykiller import playgame
 
-#startscreen()
+startscreen()
 
 playgame()
 print('done')
