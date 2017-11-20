@@ -3,7 +3,7 @@ import os
 import random
 import time
 from pygame import mixer
-from Turckeys import startscreen
+from Turckeys import getname
 
 # initialize screen
 pygame.init()
@@ -85,25 +85,30 @@ def turkey_killed_or_not(mouse_pos):
         turkey_list = new_turkey()
         time1 = time.time()
 
-name = startscreen()
+#name = startscreen()
 # save score to file
 def save_score(score):
     with open('highscores.txt', 'a') as filehandler:
-        filehandler.writelines(name + ' ' + str(score) + '\n')
-    print('highscore saved: ', name, score)
-
+        filehandler.writelines(getname() + ' ' + str(score) + '\n')
+    print('highscore saved: ', getname(), score)
 
 mouse_pos = (0, 0)
-time1 = time.time()
 time_level = 2.0
 
-timer = time.time()
 
 
-def playgame():
-    global time1, turkey_list
+def playgame(doone):
+    global score
+    global turkey_list
+    global time_level
+    time_level = 2.0
+    time1 = time.time()
+    timer = time.time()
+    score = int(0)
+    
+
     # gameloop
-    done = False
+    done = doone
     while not done:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -124,6 +129,8 @@ def playgame():
 
         screen.blit(bg, (0, 0))
         update_score(0)
+        textsurface = myfont.render('Time: ' + str(int(30-(time.time()-timer))), False, (0, 0, 0))
+        screen.blit(textsurface, (900, 0))
         show_turkeys()
 
         pygame.display.flip()
@@ -131,6 +138,5 @@ def playgame():
 
     save_score(score)
 
-
 if __name__ == '__main__':
-    playgame()
+    playgame(False)
