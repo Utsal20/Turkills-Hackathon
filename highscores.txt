@@ -1,39 +1,17 @@
-name - 0
-name - 6000
-name - 0
-name - 0
-name - 3400
-3200
-name - 2600
-name - 0
-name - 0
-name - 0
-name - 0
-name - 0
-name - 0
-name - 0
-name - 0
-name - 0
-name - 0
-name - 0
-name - 0
-name - 0
-name - 0
-name - 0
-name - 0
-name - 0
-name - 0
-name - 0
-name - 0
-name - 0
-name - 0
 name 2800
 name 1000
 name 2400
 name 1400
-name 0
 name 2200
 name 2400
 name 1400
 name 2400
 name 2400
+name 2600
+name 2200
+name 2400
+name 1400
+name 2400
+name 2400
+name 2600
+haksbfkashfkash 77737839834
