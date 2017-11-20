@@ -62,9 +62,9 @@ screen = pygame.display.set_mode((1000, 800))
 pygame.display.set_caption("Guru's Turkeys")
 done = False
 
-def startscreen():
-    global done
+def startscreen(donee):
     global name
+    done = donee
     # gameloop
     while not done:
         events = pygame.event.get()
@@ -103,4 +103,4 @@ def startscreen():
         
         
 if __name__ == '__main__':
-    startscreen()
+    startscreen(False)

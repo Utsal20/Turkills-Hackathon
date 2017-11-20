@@ -5,7 +5,7 @@ from Scores import scorescreen
 x = 7
 
 while x==7:
-    startscreen()
+    startscreen(False)
     
     playgame()
     print('done')
