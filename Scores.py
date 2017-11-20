@@ -46,6 +46,11 @@ def showScores(score,x,y,w,h):
         textRect = ((x + (w / 2)), (y + (h / 2)))
         screen.blit(textSurf, textRect)
         
+#turkey images
+turkey = pygame.transform.scale(get_image('cookedTurkey.png'), (350, 200))
+runningTurkey = pygame.transform.scale(get_image('runningTurkey.png'), (190, 130))
+
+        
 scores = getScores()
 print(scores)
 
@@ -56,6 +61,18 @@ def scorescreen():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 done = True
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    mouse_pos = pygame.mouse.get_pos()
+                    print(mouse_pos)
+                    if 350<mouse_pos[0]<560 and 700<mouse_pos[1]<760:
+                        print('play again button clicked')
+                        done = True
+                        return 7
+                    elif 610<mouse_pos[0]<760 and 700<mouse_pos[1]<760:
+                        print('exit button clicked')
+                        done = True
+                        return 2
     
         screen.fill((173, 216, 230))
         scorestitle(150,50,100,40)
@@ -76,9 +93,7 @@ def scorescreen():
         button("Exit", 610,700,150,60,white, gold,30)
     
     
-        turkey = pygame.transform.scale(get_image('cookedTurkey.png'), (350, 200))
         screen.blit(turkey, (630, 20))
-        runningTurkey = pygame.transform.scale(get_image('runningTurkey.png'), (190, 130))
         screen.blit(runningTurkey, (100, 670))
     
         pygame.display.flip()

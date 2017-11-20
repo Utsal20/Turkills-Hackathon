@@ -2,9 +2,12 @@ from Turckeys import startscreen
 from turkeykiller import playgame
 from Scores import scorescreen
 
-startscreen()
+x = 7
 
-playgame()
-print('done')
-
-scorescreen()
+while x==7:
+    startscreen()
+    
+    playgame()
+    print('done')
+    
+    x = scorescreen()
