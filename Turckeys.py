@@ -5,10 +5,12 @@ import time
 
 _image_library = {}
 
-white = (245,245,220)
-wheat = (245, 222,179)
-black = ((0,0,0))
-gold = (218,165,32)
+white = (245, 245, 220)
+wheat = (245, 222, 179)
+black = ((0, 0, 0))
+gold = (218, 165, 32)
+
+
 def get_image(path):
     global _image_library
     image = _image_library.get(path)
@@ -18,11 +20,13 @@ def get_image(path):
         _image_library[path] = image
     return image
 
+
 def text_objects(text, font):
     textSurface = font.render(text, True, black)
     return textSurface, textSurface.get_rect()
 
-def button(msg,x,y,w,h,color,hc,size):
+
+def button(msg, x, y, w, h, color, hc, size):
     mouse = pygame.mouse.get_pos()
     click = pygame.mouse.get_pressed()
     if x + w > mouse[0] > x and y + h > mouse[1] > y:
@@ -33,12 +37,12 @@ def button(msg,x,y,w,h,color,hc,size):
         pygame.draw.rect(screen, color, (x, y, w, h))
     smallText = pygame.font.Font("freesansbold.ttf", size)
     textSurf, textRect = text_objects(msg, smallText)
-    textRect.center = ((x + (w/ 2)), (y + (h / 2)))
+    textRect.center = ((x + (w / 2)), (y + (h / 2)))
     screen.blit(textSurf, textRect)
     pygame.draw.rect(screen, black, (x, y, w, h), 1)
 
 
-def fb(x,y,w,h):
+def fb(x, y, w, h):
     mouse = pygame.mouse.get_pos()
     cfb = pygame.mouse.get_pressed()
     if x + w > mouse[0] > x and y + h > mouse[1] > y:
@@ -47,11 +51,13 @@ def fb(x,y,w,h):
     fb = pygame.transform.scale(get_image('fb.png'), (220, 90))
     screen.blit(fb, (x, y))
 
-def  text(msg,x,y,w,h,size):
+
+def text(msg, x, y, w, h, size):
     smallText = pygame.font.Font("freesansbold.ttf", size)
     textSurf, textRect = text_objects(msg, smallText)
     textRect.center = ((x + (w / 2)), (y + (h / 2)))
     screen.blit(textSurf, textRect)
+
 
 textinput = pygame_textinput.TextInput()
 
@@ -62,9 +68,13 @@ screen = pygame.display.set_mode((1000, 800))
 pygame.display.set_caption("Guru's Turkeys")
 done = False
 
-def startscreen(donee):
+# name = ''
+# def getName():
+#     global name
+#     return name
+def startscreen():
+    global done
     global name
-    done = donee
     # gameloop
     while not done:
         events = pygame.event.get()
@@ -76,31 +86,31 @@ def startscreen(donee):
                 if event.button == 1:
                     mouse_pos = pygame.mouse.get_pos()
                     print(mouse_pos)
-                    if 410<mouse_pos[0]<615 and 450<mouse_pos[1]<550:
+                    if 410 < mouse_pos[0] < 615 and 450 < mouse_pos[1] < 550:
                         print('play button clicked')
                         done = True
-    
+
         screen.fill((173, 216, 230))
-        #turkeys
+        # turkeys
         turkey = pygame.transform.scale(get_image('turkey.png'), (240, 200))
         screen.blit(turkey, (20, 20))
         screen.blit(turkey, (180, 600))
         screen.blit(turkey, (600, 600))
         screen.blit(turkey, (740, 20))
-    
-        #buttons
-        button("Play", 410,450,205,100,white,gold,50)
-        fb(400,360,220,90)
-    
+
+        # buttons
+        button("Play", 410, 450, 205, 100, white, gold, 50)
+        fb(400, 360, 220, 90)
+
         # name
         text("Enter your name: ", 400, 250, 240, 50, 15)
         text("or", 490, 330, 50, 50, 15)
         textinput.update(events)
         screen.blit(textinput.get_surface(), (450, 300))
-        
+
         pygame.display.flip()
-        #clock.tick(60)
-        
-        
+        # clock.tick(60)
+    return name
+
 if __name__ == '__main__':
-    startscreen(False)
+    startscreen()
